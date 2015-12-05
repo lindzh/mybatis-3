@@ -19,7 +19,7 @@
 
 <groupId>org.mybatis</groupId>
   <artifactId>mybatis</artifactId>
-  <version>3.2.9-ldz-SNAPSHOT</version>
+  <version>3.2.9-meta</version>
   <packaging>jar</packaging>
 
   <name>MyBatis</name>
