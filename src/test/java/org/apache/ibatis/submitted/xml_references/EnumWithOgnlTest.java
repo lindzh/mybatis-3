@@ -38,7 +38,7 @@ public class EnumWithOgnlTest {
         dataSourceProperties.put("url", "jdbc:hsqldb:mem:xml_references");
         dataSourceProperties.put("username", "sa");
         dataSourceFactory.setProperties(dataSourceProperties);
-        Environment environment = new Environment("test", new JdbcTransactionFactory(), dataSourceFactory.getDataSource());
+        Environment environment = new Environment("test", new JdbcTransactionFactory(), dataSourceFactory.getDataSource(),null);
         Configuration configuration = new Configuration();
         configuration.setEnvironment(environment);
         configuration.getTypeAliasRegistry().registerAlias(Person.class);

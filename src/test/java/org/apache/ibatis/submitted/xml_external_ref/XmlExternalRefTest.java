@@ -129,7 +129,7 @@ public class XmlExternalRefTest {
 
     Configuration configuration = new Configuration();
     Environment environment = new Environment("development", new JdbcTransactionFactory(), new UnpooledDataSource(
-        "org.hsqldb.jdbcDriver", "jdbc:hsqldb:mem:xmlextref", null));
+        "org.hsqldb.jdbcDriver", "jdbc:hsqldb:mem:xmlextref", null),null);
     configuration.setEnvironment(environment);
 
     configuration.addMapper(PersonMapper.class);

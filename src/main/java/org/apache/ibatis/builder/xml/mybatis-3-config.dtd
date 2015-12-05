@@ -17,7 +17,7 @@
 
 -->
 
-<!ELEMENT configuration (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, plugins?, environments?, databaseIdProvider?, mappers?)>
+<!ELEMENT configuration (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, plugins?, environments?, databaseIdProvider?, mappers?,mapperDelegateProxy?)>
 
 <!ELEMENT databaseIdProvider (property*)>
 <!ATTLIST databaseIdProvider
@@ -105,6 +105,11 @@ type CDATA #REQUIRED
 resource CDATA #IMPLIED
 url CDATA #IMPLIED
 class CDATA #IMPLIED
+>
+
+<!ELEMENT mapperDelegateProxy EMPTY>
+<!ATTLIST mapperDelegateProxy
+class CDATA #REQUIRED
 >
 
 <!ELEMENT package EMPTY>

@@ -42,7 +42,7 @@ public class FlushTest {
     public static void setup() throws Exception {
         DataSource dataSource = BaseDataTest.createBlogDataSource();
         TransactionFactory transactionFactory = new JdbcTransactionFactory();
-        Environment environment = new Environment("Production", transactionFactory, dataSource);
+        Environment environment = new Environment("Production", transactionFactory, dataSource,null);
         Configuration configuration = new Configuration(environment);
         configuration.setDefaultExecutorType(ExecutorType.BATCH);
         configuration.getTypeAliasRegistry().registerAlias(Post.class);

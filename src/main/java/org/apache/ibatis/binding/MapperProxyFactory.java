@@ -16,7 +16,6 @@
 package org.apache.ibatis.binding;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,11 +26,13 @@ import org.apache.ibatis.session.SqlSession;
  */
 public class MapperProxyFactory<T> {
 
+  private MapperDelegateProxy mapperDelegateProxy;
   private final Class<T> mapperInterface;
   private Map<Method, MapperMethod> methodCache = new ConcurrentHashMap<Method, MapperMethod>();
 
-  public MapperProxyFactory(Class<T> mapperInterface) {
+  public MapperProxyFactory(Class<T> mapperInterface,MapperDelegateProxy mapperDelegateProxy) {
     this.mapperInterface = mapperInterface;
+    this.mapperDelegateProxy = mapperDelegateProxy;
   }
 
   public Class<T> getMapperInterface() {
@@ -42,14 +43,7 @@ public class MapperProxyFactory<T> {
     return methodCache;
   }
 
-  @SuppressWarnings("unchecked")
-  protected T newInstance(MapperProxy<T> mapperProxy) {
-    return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy);
-  }
-
   public T newInstance(SqlSession sqlSession) {
-    final MapperProxy<T> mapperProxy = new MapperProxy<T>(sqlSession, mapperInterface, methodCache);
-    return newInstance(mapperProxy);
+	return mapperDelegateProxy.newInstance(sqlSession, mapperInterface, methodCache);
   }
-
 }

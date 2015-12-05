@@ -87,7 +87,7 @@ public class NpeExtendsTest {
 		properties.setProperty("url", "jdbc:hsqldb:mem:extends_with_constructor");
 		properties.setProperty("username", "sa");
 		unpooledDataSourceFactory.setProperties(properties);
-		Environment environment = new Environment("extends_with_constructor", new JdbcTransactionFactory(), unpooledDataSourceFactory.getDataSource());
+		Environment environment = new Environment("extends_with_constructor", new JdbcTransactionFactory(), unpooledDataSourceFactory.getDataSource(),null);
 		
 		Configuration configuration = new Configuration();
 		configuration.setEnvironment(environment);

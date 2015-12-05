@@ -32,8 +32,9 @@ import java.util.Set;
  * @author Lasse Voss
  */
 public class MapperRegistry {
-
+	
   private Configuration config;
+  
   private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<Class<?>, MapperProxyFactory<?>>();
 
   public MapperRegistry(Configuration config) {
@@ -63,7 +64,7 @@ public class MapperRegistry {
       }
       boolean loadCompleted = false;
       try {
-        knownMappers.put(type, new MapperProxyFactory<T>(type));
+        knownMappers.put(type, new MapperProxyFactory<T>(type,config.getMapperDelegateProxy()));
         // It's important that the type is added before the parser is run
         // otherwise the binding may automatically be attempted by the
         // mapper parser. If the type is already known, it won't try.

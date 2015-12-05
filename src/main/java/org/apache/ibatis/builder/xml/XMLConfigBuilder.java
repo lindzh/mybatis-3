@@ -21,6 +21,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.binding.MapperDelegateProxy;
 import org.apache.ibatis.builder.BaseBuilder;
 import org.apache.ibatis.builder.BuilderException;
 import org.apache.ibatis.datasource.DataSourceFactory;
@@ -95,6 +96,7 @@ public class XMLConfigBuilder extends BaseBuilder {
 
   private void parseConfiguration(XNode root) {
     try {
+      mapperDelegateProxyElement(root.evalNode("mapperDelegateProxy"));
       propertiesElement(root.evalNode("properties")); //issue #117 read properties first
       typeAliasesElement(root.evalNode("typeAliases"));
       pluginElement(root.evalNode("plugins"));
@@ -335,6 +337,23 @@ public class XMLConfigBuilder extends BaseBuilder {
       }
     }
   }
+  
+	private void mapperDelegateProxyElement(XNode node) throws Exception {
+		if (node != null) {
+			String delegateProxyClass = node.getStringAttribute("class");
+			if (delegateProxyClass == null) {
+				throw new BuilderException("mybatis config mapperDelegateProxyElement class can't be null");
+			} else {
+				Class<?> mapperDelegateProxyClass = Class.forName(delegateProxyClass);
+				Object newInstance = mapperDelegateProxyClass.newInstance();
+				if (newInstance instanceof MapperDelegateProxy) {
+					configuration.setMapperDelegateProxy((MapperDelegateProxy) newInstance);
+				} else {
+					throw new BuilderException("mybatis config mapperDelegateProxyElement class must extends MapperDelegateProxy");
+				}
+			}
+		}
+	}
 
   private boolean isSpecifiedEnvironment(String id) {
     if (environment == null) {

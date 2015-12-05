@@ -62,7 +62,7 @@ public class BindingTest {
     BaseDataTest.runScript(dataSource, BaseDataTest.BLOG_DDL);
     BaseDataTest.runScript(dataSource, BaseDataTest.BLOG_DATA);
     TransactionFactory transactionFactory = new JdbcTransactionFactory();
-    Environment environment = new Environment("Production", transactionFactory, dataSource);
+    Environment environment = new Environment("Production", transactionFactory, dataSource,null);
     Configuration configuration = new Configuration(environment);
     configuration.setLazyLoadingEnabled(true);
     configuration.getTypeAliasRegistry().registerAlias(Blog.class);
@@ -660,7 +660,7 @@ public class BindingTest {
     try {
 
       // Create another mapper instance with a method cache we can test against:
-      final MapperProxyFactory<BoundBlogMapper> mapperProxyFactory = new MapperProxyFactory<BoundBlogMapper>(BoundBlogMapper.class);
+      final MapperProxyFactory<BoundBlogMapper> mapperProxyFactory = new MapperProxyFactory<BoundBlogMapper>(BoundBlogMapper.class,new MapperDelegateProxy());
       assertEquals(BoundBlogMapper.class, mapperProxyFactory.getMapperInterface());
       final BoundBlogMapper mapper = mapperProxyFactory.newInstance(session);
       assertNotSame(mapper, mapperProxyFactory.newInstance(session));
