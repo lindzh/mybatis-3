@@ -57,4 +57,10 @@ public class JakartaCommonsLoggingImpl implements org.apache.ibatis.logging.Log 
     log.warn(s);
   }
 
+	@Override
+	public void info(String s) {
+		log.info(s);
+
+	}
+
 }

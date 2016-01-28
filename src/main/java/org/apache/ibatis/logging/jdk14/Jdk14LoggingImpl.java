@@ -59,4 +59,10 @@ public class Jdk14LoggingImpl implements Log {
     log.log(Level.WARNING, s);
   }
 
+	@Override
+	public void info(String s) {
+		log.log(Level.INFO, s);
+
+	}
+
 }

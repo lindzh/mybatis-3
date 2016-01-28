@@ -53,4 +53,9 @@ public class StdOutImpl implements Log {
   public void warn(String s) {
     System.out.println(s);
   }
+
+	@Override
+	public void info(String s) {
+		System.out.println(s);
+	}
 }

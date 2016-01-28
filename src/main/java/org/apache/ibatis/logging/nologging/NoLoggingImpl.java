@@ -48,4 +48,9 @@ public class NoLoggingImpl implements Log {
   public void warn(String s) {
   }
 
+@Override
+public void info(String s) {
+	
+}
+
 }

@@ -60,4 +60,9 @@ public class Log4jImpl implements Log {
     log.log(FQCN, Level.WARN, s, null);
   }
 
+	@Override
+	public void info(String s) {
+		log.log(FQCN, Level.INFO, s, null);
+	}
+
 }

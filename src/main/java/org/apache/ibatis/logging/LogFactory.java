@@ -32,6 +32,11 @@ public final class LogFactory {
 
   static {
     tryImplementation(new Runnable() {
+        public void run() {
+          useLog4JLogging();
+        }
+      });
+    tryImplementation(new Runnable() {
       public void run() {
         useSlf4jLogging();
       }
@@ -44,11 +49,6 @@ public final class LogFactory {
     tryImplementation(new Runnable() {
       public void run() {
         useLog4J2Logging();
-      }
-    });
-    tryImplementation(new Runnable() {
-      public void run() {
-        useLog4JLogging();
       }
     });
     tryImplementation(new Runnable() {
