@@ -24,6 +24,7 @@ import org.apache.ibatis.session.RowBounds;
 public class SqlMonitorManager implements Interceptor {
 
 	private static final Log sqlStatLogger = LogFactory.getLog("mysqlStatLogger");
+	
 	private boolean showSql = true;
 
 	@Override
@@ -58,6 +59,14 @@ public class SqlMonitorManager implements Interceptor {
 	@Override
 	public Object plugin(Object target) {
 		return Plugin.wrap(target, this);
+	}
+	
+	public boolean isShowSql() {
+		return showSql;
+	}
+
+	public void setShowSql(boolean showSql) {
+		this.showSql = showSql;
 	}
 
 	@Override
