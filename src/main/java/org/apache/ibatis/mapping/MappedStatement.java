@@ -56,6 +56,8 @@ public final class MappedStatement {
   private Log statementLog;
   private LanguageDriver lang;
   private String[] resultSets;
+  
+  private BoundSql boundSql;
 
   private MappedStatement() {
     // constructor disabled
@@ -275,7 +277,7 @@ public final class MappedStatement {
   }
   
   public BoundSql getBoundSql(Object parameterObject) {
-    BoundSql boundSql = sqlSource.getBoundSql(parameterObject);
+    boundSql = sqlSource.getBoundSql(parameterObject);
     List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
     if (parameterMappings == null || parameterMappings.size() <= 0) {
       boundSql = new BoundSql(configuration, boundSql.getSql(), parameterMap.getParameterMappings(), parameterObject);
@@ -293,6 +295,10 @@ public final class MappedStatement {
     }
 
     return boundSql;
+  }
+  
+  public BoundSql getBoundSql(){
+	  return boundSql;
   }
 
   private static String[] delimitedStringtoArray(String in) {

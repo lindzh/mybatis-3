@@ -40,6 +40,12 @@ public class SqlMonitorManager implements Interceptor {
 
 		String sqlId = mappedStatement.getId();
 		
+		String sourceSql = null;
+		BoundSql boundSql = mappedStatement.getBoundSql();
+		if(boundSql!=null){
+			sourceSql = boundSql.getSql();
+		}
+		
 		Object returnValue = null;
 		int resultCode = 0;
 		long start = System.currentTimeMillis();
@@ -51,7 +57,11 @@ public class SqlMonitorManager implements Interceptor {
 		} finally {
 			long end = System.currentTimeMillis();
 			long time = end - start;
-			sqlStatLogger.info(sqlId + "," + resultCode + "," + time);
+			if(sourceSql!=null){
+				sqlStatLogger.info(sqlId + "," + resultCode + "," + time+"  [SQL]:{"+sourceSql+"}");
+			}else{
+				sqlStatLogger.info(sqlId + "," + resultCode + "," + time);
+			}
 		}
 		return returnValue;
 	}
