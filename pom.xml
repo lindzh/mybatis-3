@@ -19,7 +19,7 @@
 
 <groupId>org.mybatis</groupId>
   <artifactId>mybatis</artifactId>
-  <version>3.2.13-meta</version>
+  <version>3.2.14-a</version>
   <packaging>jar</packaging>
 
   <name>MyBatis</name>
